@@ -7,7 +7,9 @@ FROM Orders
 GROUP BY CustomerID
 HAVING COUNT(OrderID) > (
     SELECT AVG(OrderCount) FROM (
-        SELECT CustomerID, COUNT(OrderID) AS OrderCount
+        SELECT 
+		CustomerID, 
+		COUNT(OrderID) AS OrderCount
         FROM Orders
         GROUP BY CustomerID
     ) AS Sub
@@ -46,11 +48,15 @@ ORDER BY OrdersHandled DESC;
 
 
 WITH CustomerOrderCounts AS (
-    SELECT CustomerID, COUNT(OrderID) AS OrderCount
+    SELECT 
+	CustomerID, 
+	COUNT(OrderID) AS OrderCount
     FROM Orders
     GROUP BY CustomerID
 )
-SELECT TOP 5 CustomerID, OrderCount
+SELECT 
+	TOP 5 CustomerID, 
+	OrderCount
 FROM CustomerOrderCounts
 ORDER BY OrderCount DESC;
 
